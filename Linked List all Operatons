@@ -1,0 +1,115 @@
+#include<stdio.h>
+#include<stdlib.h>
+#include<malloc.h>
+
+struct node{
+    int data;
+    struct node *next;
+};
+struct node *head;
+void Input(int x)
+{
+    struct node *temp=(struct node*)malloc(sizeof(struct node));
+    temp->data=x;
+    temp->next=head;
+    head=temp;
+}
+int noofnodes()
+{int sum=0;
+    struct node *temp=head;
+    while(temp!=NULL){
+    sum++;
+    temp=temp->next;}
+  return sum;
+    }
+void middle()
+{
+    int k=noofnodes();
+int i;
+struct node *temp=head;
+    if(k%2!=0)
+    {   k=k/2;
+        for(i=0;i<k-1;i++)
+        temp=temp->next;
+        struct node *temp2=temp->next;
+        temp->next=temp2->next;
+        free(temp2);
+       }
+       else{
+           k=k/2;
+           for(int i=0;i<k-1;i++)
+           temp=temp->next;
+           struct node *temp2=temp->next;
+           temp->next=temp2->next;
+           free(temp2);
+       }
+}
+void print()
+{
+    struct node *temp=head;
+    while(temp!=NULL){
+    printf("%d\t",temp->data);
+        temp=temp->next;
+    }
+}
+void reverse()
+{
+    struct node *current, *next,*prev;
+    current=head;
+    prev=NULL;
+    while(current!=NULL)
+    {
+        next=current->next;
+        current->next=prev;
+        prev=current;
+        current=next;
+        
+    }
+        head=prev;
+    
+}
+void sum()
+{
+    struct node *temp=head;
+    
+    while(temp!=NULL)
+    {
+        temp->data=temp->data+1;
+        if(temp->data <9)
+        break;
+        else{
+            temp->data=temp->data%10;
+        temp=temp->next;
+    }
+    }}
+void sameremovee()
+{
+    struct node *temp=head,*temp2=temp->next,*temp3;
+    while(temp->next!=NULL)
+    {
+        if(temp->data==temp->next->data){
+        temp3=temp->next->next;
+        free(temp->next);
+        temp->next=temp3;
+            
+        }
+        else
+        temp=temp->next;
+    }
+      }
+int main() 
+{
+    head=NULL;
+Input(60); 
+Input(43); 
+Input(60);  
+Input(21);  
+Input(11);  
+Input(10);  
+Input(21);  
+//print();
+sameremovee();
+print();
+
+return 0;
+}
